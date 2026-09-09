@@ -1,3 +1,4 @@
+
 let player = {
     name: "Lollo",
     level: 10,
@@ -40,58 +41,78 @@ function shop(ObjectShop , player) {
     console.log("3. fireMagicPower");
     console.log("4. Exit");
     
-    let choose = prompt("Write a number: ");
-    choose = parseInt(choose);
+    const readline = require("readline");
+    let choose = 0;
 
-    while(choose <= 4 || choose >= 1) {
-        console.log("The value is not correct, so write the number again:");
-        choose = prompt("Write a number: "); 
+    const input = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    function askChoice() {
+        input.question("Write a number: ", (answer) => {
+            choose = parseInt(answer);
+
+            while (choose < 1 || choose > 4 || isNaN(choose)) {
+                console.log("The value is not correct.");
+                input.question("Write a number: ", (answer) => {
+                    choose = parseInt(answer);
+                });
+            }
+
+            input.close();
+
+            switch(choose) {
+                case 1:
+                    if(player.money >= ObjectShop.sword.price){
+                        if(player.level >= ObjectShop.sword.minLevelRequired){
+                            player.inventory.push(ObjectShop.sword);
+                            player.money -= ObjectShop.sword.price;
+                            console.log("You brought the sword");
+                        }else{
+                            console.log("You don't have the level required")
+                        }
+                    }else{
+                        console.log("You don't have enought money")
+                    };
+                case 2:
+                    if(player.money >= ObjectShop.shild.price){
+                        if(player.level >= ObjectShop.shild.minLevelRequired){
+                            player.inventory.push(ObjectShop.shild);
+                            player.money -= ObjectShop.shild.price;
+                            console.log("You brought the shild");
+                        }else{
+                            console.log("You don't have the level required")
+                        }
+                    }else{
+                        console.log("You don't have enought money")
+                    };
+                case 3:
+                    if(player.money >= ObjectShop.fireMagicPower.price){
+                        if(player.level >= ObjectShop.fireMagicPower.minLevelRequired) {
+                            player.inventory.push(ObjectShop.fireMagicPower);
+                            player.money -= ObjectShop.fireMagicPower.price;
+                            console.log("You brought the fireMagicPower");
+                        }else{
+                            console.log("You don't have the level required");
+                        }
+                    }else{
+                        console.log("You don't have enought money");
+                    };
+                case 4:
+                    console.log("Goodbye");
+                    break;
+            }
+
+            input.close();
+            showPlayerStats(player);
+        });
     }
 
-    console.log("The value is not correct, so write the number again:");
-    choose = new int("Write a number: ");
-    switch(choose) {
-        case '1':
-            if(player.money >= sword.price){
-                if(player.level >= sword.minLevelRequired){
-                    player.intentory.push(sword);
-                    player.money -= sword.price;
-                    console.log("You brought the sword");
-                }else{
-                    console.log("You don't have the level required")
-                }
-            }else{
-                console.log("You don't have enought money")
-            };
-            break;
-        case '2':
-            if(player.money >= shild.price){
-                if(player.level >= shild.minLevelRequired){
-                    player.intentory.push(shild);
-                    player.money -= shild.price;
-                    console.log("You brought the shild");
-                }else{
-                    console.log("You don't have the level required")
-                }
-            }else{
-                console.log("You don't have enought money")
-            };
-            break;
-        case '3':
-            if(player.money >= fireMagicPower.price){
-                if(player.level >= fireMagicPower.minLevelRequired) {
-                    player.intentory.push(fireMagicPower);
-                    player.money -= fireMagicPower.price;
-                    console.log("You brought the fireMagicPower");
-                }else{
-                    console.log("You don't have the level required");
-                }
-            }else{
-                console.log("You don't have enought money");
-            };
-            break;
-        case '4':
-            console.log("Goodbye");
-            break;
-    }
+    askChoice();
 }
+
+const objectShop = new ObjectShop();
+
+showPlayerStats(player);
+shop(objectShop, player);
