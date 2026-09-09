@@ -1,0 +1,1 @@
+# Questo file sarà un posto dove mettero i miei progetti/esercizi che farò mentre imparerò Javascript
