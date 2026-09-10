@@ -75,6 +75,7 @@ function shop(ObjectShop , player) {
                     }else{
                         console.log("You don't have enought money")
                     };
+                    break;
                 case 2:
                     if(player.money >= ObjectShop.shild.price){
                         if(player.level >= ObjectShop.shild.minLevelRequired){
@@ -87,6 +88,7 @@ function shop(ObjectShop , player) {
                     }else{
                         console.log("You don't have enought money")
                     };
+                    break;
                 case 3:
                     if(player.money >= ObjectShop.fireMagicPower.price){
                         if(player.level >= ObjectShop.fireMagicPower.minLevelRequired) {
@@ -99,6 +101,7 @@ function shop(ObjectShop , player) {
                     }else{
                         console.log("You don't have enought money");
                     };
+                    break;
                 case 4:
                     console.log("Goodbye");
                     break;
