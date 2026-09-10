@@ -9,19 +9,19 @@ let player = {
 
 class ObjectShop {
 
-    sword = {
+    static sword = {
         name: "Sword",
         price: 50,
         minLevelRequired: 1,
     };
     
-    shild = {
+    static shild = {
         name: "Shild",
         price: 150,
         minLevelRequired: 5,
     };
     
-    fireMagicPower = {
+    static fireMagicPower = {
         name: "Fire Magic Power",
         price: 300,
         minLevelRequired: 15,
@@ -30,10 +30,10 @@ class ObjectShop {
 }
 
 function showPlayerStats(player) {
-    console.log(player);
+    console.log("Player: ", player);
 }
 
-function shop(ObjectShop , player) {
+function shop(sword, shild, fireMagicPower , player) {
 
     console.log("Menu");
     console.log("1. Sword");
@@ -64,10 +64,10 @@ function shop(ObjectShop , player) {
 
             switch(choose) {
                 case 1:
-                    if(player.money >= ObjectShop.sword.price){
-                        if(player.level >= ObjectShop.sword.minLevelRequired){
-                            player.inventory.push(ObjectShop.sword);
-                            player.money -= ObjectShop.sword.price;
+                    if(player.money >= objectShop.sword.price){
+                        if(player.level >= objectShop.sword.minLevelRequired){
+                            player.inventory.push(objectShop.sword.name);
+                            player.money -= objectShop.sword.price;
                             console.log("You brought the sword");
                         }else{
                             console.log("You don't have the level required")
@@ -77,10 +77,10 @@ function shop(ObjectShop , player) {
                     };
                     break;
                 case 2:
-                    if(player.money >= ObjectShop.shild.price){
-                        if(player.level >= ObjectShop.shild.minLevelRequired){
-                            player.inventory.push(ObjectShop.shild);
-                            player.money -= ObjectShop.shild.price;
+                    if(player.money >= objectShop.shild.price){
+                        if(player.level >= objectShop.shild.minLevelRequired){
+                            player.inventory.push(objectShop.shild.name);
+                            player.money -= objectShop.shild.price;
                             console.log("You brought the shild");
                         }else{
                             console.log("You don't have the level required")
@@ -90,10 +90,10 @@ function shop(ObjectShop , player) {
                     };
                     break;
                 case 3:
-                    if(player.money >= ObjectShop.fireMagicPower.price){
-                        if(player.level >= ObjectShop.fireMagicPower.minLevelRequired) {
-                            player.inventory.push(ObjectShop.fireMagicPower);
-                            player.money -= ObjectShop.fireMagicPower.price;
+                    if(player.money >= objectShop.fireMagicPower.price){
+                        if(player.level >= objectShop.fireMagicPower.minLevelRequired) {
+                            player.inventory.push(objectShop.fireMagicPower.name);
+                            player.money -= objectShop.fireMagicPower.price;
                             console.log("You brought the fireMagicPower");
                         }else{
                             console.log("You don't have the level required");
