@@ -5,7 +5,7 @@ let player = {
     money: 500,
     lifePoint: 100,
     inventory: ["Stick"],
-}
+};
 
 class ObjectShop {
 
@@ -33,7 +33,14 @@ function showPlayerStats(player) {
     console.log("Player: ", player);
 }
 
-function shop(sword, shild, fireMagicPower , player) {
+function shop(player) {
+    
+    const readline = require("readline");
+
+    const input = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
 
     console.log("Menu");
     console.log("1. Sword");
@@ -41,33 +48,23 @@ function shop(sword, shild, fireMagicPower , player) {
     console.log("3. fireMagicPower");
     console.log("4. Exit");
     
-    const readline = require("readline");
-    let choose = 0;
-
-    const input = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
 
     function askChoice() {
         input.question("Write a number: ", (answer) => {
-            choose = parseInt(answer);
+            const choice = Number(answer.trim());
 
-            while (choose < 1 || choose > 4 || isNaN(choose)) {
+            if(!Number.isInteger(choice) || choice < 1 || choice > 4) {
                 console.log("The value is not correct.");
-                input.question("Write a number: ", (answer) => {
-                    choose = parseInt(answer);
-                });
+                askChoice();
+                return;
             }
 
-            input.close();
-
-            switch(choose) {
+            switch(choice) {
                 case 1:
-                    if(player.money >= objectShop.sword.price){
-                        if(player.level >= objectShop.sword.minLevelRequired){
-                            player.inventory.push(objectShop.sword.name);
-                            player.money -= objectShop.sword.price;
+                    if(player.money >= ObjectShop.sword.price){
+                        if(player.level >= ObjectShop.sword.minLevelRequired){
+                            player.inventory.push(ObjectShop.sword.name);
+                            player.money -= ObjectShop.sword.price;
                             console.log("You brought the sword");
                         }else{
                             console.log("You don't have the level required")
@@ -77,10 +74,10 @@ function shop(sword, shild, fireMagicPower , player) {
                     };
                     break;
                 case 2:
-                    if(player.money >= objectShop.shild.price){
-                        if(player.level >= objectShop.shild.minLevelRequired){
-                            player.inventory.push(objectShop.shild.name);
-                            player.money -= objectShop.shild.price;
+                    if(player.money >= ObjectShop.shild.price){
+                        if(player.level >= ObjectShop.shild.minLevelRequired){
+                            player.inventory.push(ObjectShop.shild.name);
+                            player.money -= ObjectShop.shild.price;
                             console.log("You brought the shild");
                         }else{
                             console.log("You don't have the level required")
@@ -90,10 +87,10 @@ function shop(sword, shild, fireMagicPower , player) {
                     };
                     break;
                 case 3:
-                    if(player.money >= objectShop.fireMagicPower.price){
-                        if(player.level >= objectShop.fireMagicPower.minLevelRequired) {
-                            player.inventory.push(objectShop.fireMagicPower.name);
-                            player.money -= objectShop.fireMagicPower.price;
+                    if(player.money >= ObjectShop.fireMagicPower.price){
+                        if(player.level >= ObjectShop.fireMagicPower.minLevelRequired) {
+                            player.inventory.push(ObjectShop.fireMagicPower.name);
+                            player.money -= ObjectShop.fireMagicPower.price;
                             console.log("You brought the fireMagicPower");
                         }else{
                             console.log("You don't have the level required");
@@ -113,9 +110,7 @@ function shop(sword, shild, fireMagicPower , player) {
     }
 
     askChoice();
-}
-
-const objectShop = new ObjectShop();
+};
 
 showPlayerStats(player);
-shop(objectShop, player);
+shop(player);
