@@ -112,5 +112,4 @@ function shop(player) {
     askChoice();
 };
 
-showPlayerStats(player);
 shop(player);
