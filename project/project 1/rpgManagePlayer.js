@@ -1,4 +1,3 @@
-
 let player = {
     name: "Lollo",
     level: 10,
