@@ -23,7 +23,7 @@ async function aggiungiSpesa(spesa) {
     };
 
     const categoria = await input.question("Write the category of the product:  ")
-    const data = await input.question("Write the date of the day: ");
+    const data = await input.question("Write the date of the day (DD/MM/AAAA): ");
 
     const nuovaSpesa = {
         nome,
